@@ -1,24 +1,36 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+// The real competition project is a pure HTML/CSS/JS app served from
+// /public/site/. The index route redirects to it so the preview shows
+// the actual deliverable.
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Chrona — Letters to your future self" },
+      {
+        name: "description",
+        content:
+          "A personal time capsule. Write letters to your future self, seal memories, and rediscover them when the time is right.",
+      },
+      { property: "og:title", content: "Chrona — Letters to your future self" },
+      {
+        property: "og:description",
+        content: "A quiet home for your memories. Seal them today, open them tomorrow.",
+      },
+      { property: "og:type", content: "website" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
+  useEffect(() => {
+    window.location.replace("/site/index.html");
+  }, []);
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div style={{ minHeight: "100vh", display: "grid", placeItems: "center", background: "#faf7f2", color: "#1a1a1a", fontFamily: "system-ui, sans-serif" }}>
+      <p>Opening Chrona…</p>
     </div>
   );
 }
