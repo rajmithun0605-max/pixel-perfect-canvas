@@ -25,26 +25,33 @@ function currentPath() {
 }
 
 function render() {
-  const path = currentPath();
-  const view = routes[path];
-  const app = document.getElementById("app");
-  app.innerHTML = "";
-  if (view) {
-    view(app);
+  const doRender = () => {
+    const path = currentPath();
+    const view = routes[path];
+    const app = document.getElementById("app");
+    app.innerHTML = "";
+    if (view) {
+      view(app);
+    } else {
+      const tpl = document.getElementById("tpl-404");
+      app.appendChild(tpl.content.cloneNode(true));
+    }
+    document.querySelectorAll(".nav__links a").forEach((a) => {
+      a.classList.toggle("is-active", a.dataset.route === path);
+    });
+    window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
+    app.focus({ preventScroll: true });
+    observeReveals();
+  };
+
+  // View Transitions API for smooth cross-fades between pages
+  if (document.startViewTransition && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.startViewTransition(doRender);
   } else {
-    const tpl = document.getElementById("tpl-404");
-    app.appendChild(tpl.content.cloneNode(true));
+    doRender();
   }
-  // Update active nav
-  document.querySelectorAll(".nav__links a").forEach((a) => {
-    a.classList.toggle("is-active", a.dataset.route === path);
-  });
-  // Focus main for a11y, reset scroll
-  window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
-  app.focus({ preventScroll: true });
-  // Reveal on scroll
-  observeReveals();
 }
+
 
 let io;
 function observeReveals() {
