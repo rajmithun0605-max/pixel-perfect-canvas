@@ -17,7 +17,12 @@
   <link rel="stylesheet" href="styles/main.css" />
 </head>
 <body>
-  <!-- Loading screen -->
+  <!-- Ambient layers -->
+  <div class="aurora" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+
   <div id="loader" class="loader" aria-hidden="true">
     <div class="loader__ink">
       <svg viewBox="0 0 100 100" width="80" height="80" aria-hidden="true">
@@ -95,20 +100,36 @@
     <section class="hero">
       <div class="hero__eyebrow">a personal time capsule</div>
       <h1 class="hero__title">
-        Write a letter to the <em>you</em><br />that hasn't happened yet.
+        <span class="hero__word" style="animation-delay:.05s">Write</span>
+        <span class="hero__word" style="animation-delay:.15s">a</span>
+        <span class="hero__word" style="animation-delay:.25s">letter</span>
+        <span class="hero__word" style="animation-delay:.35s">to</span>
+        <span class="hero__word" style="animation-delay:.45s">the</span>
+        <br />
+        <span class="hero__word" style="animation-delay:.55s"><em>you</em></span>
+        <span class="hero__word" style="animation-delay:.65s">that</span>
+        <span class="hero__word" style="animation-delay:.75s">hasn't</span>
+        <span class="hero__word" style="animation-delay:.85s">happened</span>
+        <span class="hero__word" style="animation-delay:.95s">yet.</span>
       </h1>
       <p class="hero__lede">
         Chrona is a quiet home for the thoughts, photos, and small moments you'd
         like to rediscover — sealed today, opened when the time is right.
       </p>
       <div class="hero__cta">
-        <a href="#/new" class="btn btn--primary">Seal a capsule</a>
-        <a href="#/timeline" class="btn btn--ghost">Open your archive</a>
+        <a href="#/new" class="btn btn--primary" data-magnetic>Seal a capsule →</a>
+        <a href="#/timeline" class="btn btn--ghost" data-magnetic>Open your archive</a>
       </div>
-      <svg class="hero__ink" viewBox="0 0 600 40" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M2 20 Q 150 5 300 20 T 598 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
+      <div class="hero__marquee" aria-hidden="true">
+        <div>
+          <span>slow down</span><span>write honestly</span><span>seal it away</span>
+          <span>rediscover</span><span>past you speaks</span><span>future you listens</span>
+          <span>slow down</span><span>write honestly</span><span>seal it away</span>
+          <span>rediscover</span><span>past you speaks</span><span>future you listens</span>
+        </div>
+      </div>
     </section>
+
 
     <section class="steps reveal">
       <h2 class="section-title">How it works</h2>

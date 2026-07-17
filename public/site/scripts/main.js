@@ -5,6 +5,8 @@ import { initSearch, openSearch } from "./ui/search.js";
 import { initModal, openCapsule } from "./ui/modal.js";
 import { store } from "./storage.js";
 import { toast } from "./ui/toast.js";
+import { initCursorGlow, initNavScroll, refreshFx } from "./ui/fx.js";
+
 
 // Loading screen — hide after first paint (skip delay on subsequent visits)
 window.addEventListener("load", () => {
@@ -21,6 +23,12 @@ initTheme();
 initSearch();
 initModal();
 initRouter();
+initCursorGlow();
+initNavScroll();
+refreshFx();
+// Refresh FX after every route change
+addEventListener("hashchange", () => setTimeout(refreshFx, 30));
+
 
 // Deep-link: open capsule from ?c=<id>
 const params = new URLSearchParams(location.hash.split("?")[1] || "");
